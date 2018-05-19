@@ -18,35 +18,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuT-Ps-Y7N">
-                                <rect key="frame" x="144" y="525" width="87" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Weather"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuT-Ps-Y7N">
+                                <rect key="frame" x="96" y="511" width="183" height="91"/>
+                                <color key="backgroundColor" red="0.0" green="0.78823529411764703" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="91" id="JUS-dU-Zjl"/>
+                                    <constraint firstAttribute="width" constant="183" id="SHo-TO-Rfu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" red="0.0" green="0.78823529411764703" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Get Weather">
+                                    <color key="titleColor" red="0.96348968957537418" green="0.97194488450364691" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="getWeatherButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9bd-jr-pfL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHy-Qv-dgf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHy-Qv-dgf">
                                 <rect key="frame" x="112" y="108" width="150" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="9zw-pS-9ps"/>
+                                    <constraint firstAttribute="width" constant="150" id="Zxi-ZG-KFp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KE-lz-W9n">
-                                <rect key="frame" x="75" y="409" width="220" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KE-lz-W9n">
+                                <rect key="frame" x="137.5" y="409" width="100" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ObK-e8-Sl8"/>
+                                    <constraint firstAttribute="width" constant="100" id="YJC-LO-IDQ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RFc-8B-m7B">
+                                <rect key="frame" x="177" y="173" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BcH-5p-Od6">
+                                <rect key="frame" x="177" y="409" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Kh8-y8-KLn"/>
+                                    <constraint firstAttribute="height" constant="20" id="ZSm-8C-QEY"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WuT-Ps-Y7N" secondAttribute="bottom" constant="65" id="6CA-IW-6OR"/>
+                            <constraint firstItem="BcH-5p-Od6" firstAttribute="top" secondItem="JHy-Qv-dgf" secondAttribute="bottom" constant="151" id="XgF-Xj-dVp"/>
+                            <constraint firstItem="4KE-lz-W9n" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cWt-fR-Y6K"/>
+                            <constraint firstItem="JHy-Qv-dgf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g3L-zg-8bX"/>
+                            <constraint firstAttribute="bottom" secondItem="4KE-lz-W9n" secondAttribute="bottom" constant="237" id="g80-hN-xXj"/>
+                            <constraint firstItem="BcH-5p-Od6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h99-3o-x3O"/>
+                            <constraint firstItem="WuT-Ps-Y7N" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pPl-Sn-M0m"/>
+                            <constraint firstItem="WuT-Ps-Y7N" firstAttribute="top" secondItem="BcH-5p-Od6" secondAttribute="bottom" constant="82" id="wNY-NW-IZy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="locationSpinner" destination="BcH-5p-Od6" id="Saa-X3-Iqt"/>
                         <outlet property="locationlabel" destination="4KE-lz-W9n" id="D1h-8T-SVZ"/>
                         <outlet property="tempLabel" destination="JHy-Qv-dgf" id="jwi-Ey-jBe"/>
+                        <outlet property="tempSpinner" destination="RFc-8B-m7B" id="chL-fO-8cx"/>
                         <outlet property="weatherButton" destination="WuT-Ps-Y7N" id="V0e-ee-Cbd"/>
                     </connections>
                 </viewController>

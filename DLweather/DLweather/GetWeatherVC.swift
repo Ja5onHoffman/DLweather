@@ -14,6 +14,8 @@ class GetWeatherVC: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var locationlabel: UILabel!
     @IBOutlet weak var weatherButton: UIButton!
+    @IBOutlet weak var tempSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var locationSpinner: UIActivityIndicatorView!
     
     var locationManager: CLLocationManager?
     
@@ -24,9 +26,11 @@ class GetWeatherVC: UIViewController {
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest // battery expensive
         
+        tempSpinner.isHidden = true
+        locationSpinner.isHidden = true
         
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            // usint 'always' here for simplicity
+            // using 'always' here for simplicity
             locationManager?.requestAlwaysAuthorization()
         }
         
@@ -34,12 +38,20 @@ class GetWeatherVC: UIViewController {
     
     @IBAction func getWeatherButtonPressed(_ sender: Any) {
         locationManager?.requestLocation()
+        toggleLocLabels()
+        toggleTempLables()
+    }
+
+    func toggleLocLabels() {
+        locationlabel.isHidden = !locationlabel.isHidden
+        locationSpinner.isHidden = !locationSpinner.isHidden
+    }
+
+    func toggleTempLables() {
+        tempLabel.isHidden = !tempLabel.isHidden
+        tempSpinner.isHidden = !tempSpinner.isHidden
     }
     
-//    func getLocation() {
-//        locationManager?.requestLocation()
-//    }
-
     func getWeatherFor(location: String) {
         var baseUrl = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")
         let zipItem = URLQueryItem(name: "zip", value: "\(location)") // will have to do something with location here
@@ -58,62 +70,26 @@ class GetWeatherVC: UIViewController {
                 DispatchQueue.main.async {
                     do {
                         let response = try JSONSerialization.jsonObject(with: json, options: [])
+                        // yes, ugly
+                        if let dict = response as? [String: Any] {
+                            if let main = dict["main"] as? [String: Any] {
+                                if let temp = main["temp"] as? Double {
+                                    let tempK = Measurement(value: temp, unit: UnitTemperature.kelvin)
+                                    let tempF = tempK.converted(to: .fahrenheit)
+                                    self.tempLabel.text = "\(round(tempF.value))"
+                                }
+                                self.toggleTempLables()
+                            }
+                        }
                     } catch {
-                        print("err")
+                        print("error creating JSON")
                     }
                 }
-            } else {
-                print("not working")
             }
         }
         
         task.resume()
     }
-    
-//    func dummu() {
-//        var urlComponents = URLComponents()
-//        urlComponents.scheme = "https"
-//        urlComponents.host = "jsonplaceholder.typicode.com"
-//        urlComponents.path = "/posts"
-//        let userIdItem = URLQueryItem(name: "userId", value: "\(userId)")
-//        urlComponents.queryItems = [userIdItem]
-//        guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
-//
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "GET"
-//
-//        let config = URLSessionConfiguration.default
-//        let session = URLSession(configuration: config)
-//        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-//            DispatchQueue.main.async {
-//                if let error = responseError {
-//                    completion?(.failure(error))
-//                } else if let jsonData = responseData {
-//                    // Now we have jsonData, Data representation of the JSON returned to us
-//                    // from our URLRequest...
-//
-//                    // Create an instance of JSONDecoder to decode the JSON data to our
-//                    // Codable struct
-//                    let decoder = JSONDecoder()
-//
-//                    do {
-//                        // We would use Post.self for JSON representing a single Post
-//                        // object, and [Post].self for JSON representing an array of
-//                        // Post objects
-//                        let posts = try decoder.decode([Post].self, from: jsonData)
-//                        completion?(.success(posts))
-//                    } catch {
-//                        completion?(.failure(error))
-//                    }
-//                } else {
-//                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
-//                    completion?(.failure(error))
-//                }
-//            }
-//        }
-//
-//        task.resume()
-//    }
 }
 
 extension GetWeatherVC: CLLocationManagerDelegate {
@@ -123,7 +99,10 @@ extension GetWeatherVC: CLLocationManagerDelegate {
         if let loc = locations.last {
             geoCoder.reverseGeocodeLocation(loc) { (placemark, error) in
                 if let pl = placemark {
-                    print(pl[0])
+                    guard let zip = pl[0].postalCode else { print("no zip"); return }
+                    self.getWeatherFor(location: "\(zip)")
+                    self.locationlabel.text = "\(zip)"
+                    self.toggleLocLabels()
                 }
             }
         }
