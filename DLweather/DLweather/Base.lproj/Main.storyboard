@@ -13,7 +13,7 @@
         <!--Get WeatherVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GetWeatherVC" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GetWeatherVC" customModule="DLweather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,6 +22,9 @@
                                 <rect key="frame" x="144" y="525" width="87" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Get Weather"/>
+                                <connections>
+                                    <action selector="getWeatherButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9bd-jr-pfL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHy-Qv-dgf">
                                 <rect key="frame" x="112" y="108" width="150" height="150"/>
